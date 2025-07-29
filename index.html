@@ -3,131 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beach Store Analytics</title>
+    <title>Sweamwear Store Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         body {
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #00c4ff, #ffeb3b);
-            color: #333;
-            display: flex;
-            flex-direction: column;
+            background: linear-gradient(135deg, #ff6a00, #ee0979, #4b0082);
             min-height: 100vh;
+            font-family: 'Arial', sans-serif;
+            color: #ffffff;
+            overflow-x: hidden;
         }
-        header {
-            background: linear-gradient(90deg, #ff6f61, #ffb347);
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .glow {
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 0 40px rgba(255, 106, 0, 0.3);
+            transition: all 0.3s ease-in-out;
         }
-        header h1 {
-            margin: 0;
-            font-size: 2.5em;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        .glow:hover {
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.7), 0 0 60px rgba(255, 106, 0, 0.5);
+            transform: scale(1.02);
         }
-        nav {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 10px;
-            text-align: center;
-        }
-        nav a {
-            color: #0077b6;
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-        nav a:hover {
-            color: #ff6f61;
+        .navbar {
+            background: linear-gradient(90deg, rgba(75, 0, 130, 0.8), rgba(238, 9, 121, 0.8));
+            backdrop-filter: blur(10px);
         }
         .container {
-            flex: 1;
             max-width: 1200px;
-            margin: 20px auto;
+            margin: 0 auto;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .viz-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
         }
         .description {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
             margin-bottom: 20px;
             line-height: 1.6;
         }
-        .description h2 {
-            color: #ff6f61;
-            font-size: 1.8em;
-        }
-        .tableau-embed {
-            margin: 20px 0;
-            border: 2px solid #ffb347;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        .back-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background: linear-gradient(90deg, #00c4ff, #0077b6);
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
+        .btn-home {
+            background: linear-gradient(45deg, #ff6a00, #ffd700);
+            color: #1a1a1a;
             font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
         }
-        .back-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        .btn-home:hover {
+            background: linear-gradient(45deg, #ffd700, #ff6a00);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+            transform: translateY(-2px);
         }
-        footer {
-            background: linear-gradient(90deg, #0077b6, #00c4ff);
-            color: white;
-            text-align: center;
-            padding: 10px;
-            position: relative;
-            bottom: 0;
-            width: 100%;
+        @media (max-width: 768px) {
+            .viz-container {
+                padding: 10px;
+            }
+            .container {
+                padding: 10px;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Beach Store Analytics</h1>
-    </header>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="#products">Products</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+    <nav class="navbar p-4">
+        <div class="container flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Sweamwear Store Analytics</h1>
+            <a href="index.html" class="btn-home glow">Back to Home</a>
+        </div>
     </nav>
+
     <div class="container">
-        <div class="description">
-            <h2>System Description</h2>
-            <p>The Beach Store Analytics system provides insights into sales and inventory trends for our beach-themed retail store. We specialize in swimwear, sunglasses, hats, beach umbrellas, and other summer essentials. The system aggregates data from our point-of-sale systems and online store to track product performance, customer preferences, and seasonal trends.</p>
-            <h2>Graph Significance</h2>
-            <p>The embedded Tableau Public dashboard below visualizes key metrics such as sales by product category, seasonal demand fluctuations, and inventory turnover rates. This data helps our team optimize stock levels, plan promotions, and understand customer behavior. For example, spikes in swimwear sales during summer months inform our marketing strategies, while hat and sunglasses trends guide inventory restocking decisions.</p>
+        <div class="description glow">
+            <h2 class="text-xl font-semibold mb-2">System Description</h2>
+            <p>
+                This dashboard provides a comprehensive analysis of the Sweamwear Store's performance. It integrates data from sales, inventory, and customer demographics to offer insights into business operations. The system is built using Tableau Public, allowing for interactive and dynamic visualizations that help stakeholders make data-driven decisions.
+            </p>
+            <h2 class="text-xl font-semibold mt-4 mb-2">Significance of the Graph</h2>
+            <p>
+                The embedded Tableau dashboard displays key performance indicators (KPIs) such as total sales, product category performance, and regional sales distribution. It allows users to filter data by time period, product type, and customer segments, providing a clear view of trends and patterns. This visualization is crucial for identifying top-performing products, optimizing inventory, and targeting marketing efforts effectively.
+            </p>
         </div>
-        <div class="tableau-embed">
-            <div id="tableauViz"></div>
+
+        <div class="viz-container glow">
+            <tableau-viz id="tableauViz"
+                         src="https://public.tableau.com/views/sweamwearstore/Dashboard1"
+                         toolbar="bottom"
+                         hide-tabs
+                         width="100%"
+                         height="800px">
+            </tableau-viz>
         </div>
-        <a href="index.html" class="back-button">Back to Home</a>
     </div>
-    <footer>
-        <p>&copy; 2025 Beach Store. All rights reserved.</p>
-    </footer>
-    <script src="https://public.tableau.com/javascripts/api/viz_v1.js"></script>
+
+    <script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
     <script>
-        window.onload = function() {
-            const vizElement = document.getElementById('tableauViz');
-            const vizUrl = 'https://public.tableau.com/views/sweamwearstore/Dashboard1?:language=en-US&:display_count=n&:origin=viz_share_link';
-            const options = {
-                hideTabs: true,
-                hideToolbar: true,
-                onFirstInteractive: function() {
-                    console.log('Tableau dashboard loaded successfully.');
-                }
-            };
-            const viz = new tableau.Viz(vizElement, vizUrl, options);
-        };
+        document.addEventListener('DOMContentLoaded', () => {
+            const viz = document.getElementById('tableauViz');
+            window.addEventListener('resize', () => viz.resize());
+        });
     </script>
 </body>
 </html>
