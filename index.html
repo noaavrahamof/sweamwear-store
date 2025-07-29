@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beach Store Analytics</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #00c4ff, #ffeb3b);
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background: linear-gradient(90deg, #ff6f61, #ffb347);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        nav {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: #0077b6;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #ff6f61;
+        }
+        .container {
+            flex: 1;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .description {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .description h2 {
+            color: #ff6f61;
+            font-size: 1.8em;
+        }
+        .tableau-embed {
+            margin: 20px 0;
+            border: 2px solid #ffb347;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(90deg, #00c4ff, #0077b6);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .back-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        footer {
+            background: linear-gradient(90deg, #0077b6, #00c4ff);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Beach Store Analytics</h1>
+    </header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="#products">Products</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    <div class="container">
+        <div class="description">
+            <h2>System Description</h2>
+            <p>The Beach Store Analytics system provides insights into sales and inventory trends for our beach-themed retail store. We specialize in swimwear, sunglasses, hats, beach umbrellas, and other summer essentials. The system aggregates data from our point-of-sale systems and online store to track product performance, customer preferences, and seasonal trends.</p>
+            <h2>Graph Significance</h2>
+            <p>The embedded Tableau Public dashboard below visualizes key metrics such as sales by product category, seasonal demand fluctuations, and inventory turnover rates. This data helps our team optimize stock levels, plan promotions, and understand customer behavior. For example, spikes in swimwear sales during summer months inform our marketing strategies, while hat and sunglasses trends guide inventory restocking decisions.</p>
+        </div>
+        <div class="tableau-embed">
+            <div id="tableauViz"></div>
+        </div>
+        <a href="index.html" class="back-button">Back to Home</a>
+    </div>
+    <footer>
+        <p>&copy; 2025 Beach Store. All rights reserved.</p>
+    </footer>
+    <script src="https://public.tableau.com/javascripts/api/viz_v1.js"></script>
+    <script>
+        window.onload = function() {
+            const vizElement = document.getElementById('tableauViz');
+            const vizUrl = 'https://public.tableau.com/views/sweamwearstore/Dashboard1?:language=en-US&:display_count=n&:origin=viz_share_link';
+            const options = {
+                hideTabs: true,
+                hideToolbar: true,
+                onFirstInteractive: function() {
+                    console.log('Tableau dashboard loaded successfully.');
+                }
+            };
+            const viz = new tableau.Viz(vizElement, vizUrl, options);
+        };
+    </script>
+</body>
+</html>
