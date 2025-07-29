@@ -46,7 +46,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-            padding-top: 140px; /* Increased to avoid overlap with sun */
+            padding-top: 140px;
         }
         .viz-container {
             background: rgba(255, 255, 255, 0.1);
@@ -61,7 +61,7 @@
             margin-bottom: 20px;
             line-height: 1.6;
         }
-        .btn-home {
+        .btn {
             background: linear-gradient(45deg, #ff6a00, #ffd700);
             color: #1a1a1a;
             font-weight: bold;
@@ -70,11 +70,45 @@
             text-decoration: none;
             display: inline-block;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
-        .btn-home:hover {
+        .btn:hover {
             background: linear-gradient(45deg, #ffd700, #ff6a00);
             box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
             transform: translateY(-2px);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: linear-gradient(135deg, rgba(255, 106, 0, 0.9), rgba(75, 0, 130, 0.9));
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
+        }
+        .close-btn {
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+            color: #ffd700;
+        }
+        .header-logo {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
         }
         @media (max-width: 768px) {
             .viz-container {
@@ -90,6 +124,14 @@
                 top: 10px;
                 right: 10px;
             }
+            .modal-content {
+                width: 95%;
+                padding: 20px;
+            }
+            .header-logo {
+                width: 40px;
+                height: 40px;
+            }
         }
     </style>
 </head>
@@ -97,10 +139,53 @@
     <div class="sun"></div>
     <nav class="navbar p-4">
         <div class="container flex justify-between items-center">
-            <h1 class="text-2xl font-bold">Sweamwear Store Analytics</h1>
-            <a href="index.html" class="btn-home glow">Back to Home</a>
+            <div class="flex items-center">
+                <svg class="header-logo glow" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="30" fill="url(#sunGradient)" />
+                    <path d="M50 20 L60 35 L75 35 L65 50 L75 65 L50 80 L25 65 L35 50 L25 35 L40 35 Z" fill="none" stroke="#ffd700" stroke-width="5" />
+                    <defs>
+                        <linearGradient id="sunGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#ff6a00;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <h1 class="text-2xl font-bold">Sweamwear Store Analytics</h1>
+            </div>
+            <div>
+                <button class="btn glow" onclick="openModal('aboutModal')">About</button>
+                <button class="btn glow ml-4" onclick="openModal('productsModal')">Products</button>
+                <a href="index.html" class="btn glow ml-4">Back to Home</a>
+            </div>
         </div>
     </nav>
+
+    <div id="aboutModal" class="modal">
+        <div class="modal-content glow">
+            <span class="close-btn" onclick="closeModal('aboutModal')">&times;</span>
+            <h2 class="text-2xl font-semibold mb-4">About Sweamwear Store</h2>
+            <p class="mb-4">
+                Sweamwear Store is dedicated to providing high-quality, stylish swimwear that combines comfort, durability, and vibrant designs inspired by the beauty of the ocean and sun. Our mission is to empower individuals to feel confident and radiant at the beach or pool, offering eco-friendly materials and inclusive sizing.
+            </p>
+        </div>
+    </div>
+
+    <div id="productsModal" class="modal">
+        <div class="modal-content glow">
+            <span class="close-btn" onclick="closeModal('productsModal')">&times;</span>
+            <h2 class="text-2xl font-semibold mb-4">Our Products</h2>
+            <ul class="list-disc pl-6 mb-4">
+                <li><strong>One-Piece Swimsuits:</strong> Elegant and timeless designs, available in vibrant sunset-inspired colors like coral, turquoise, and yellow-orange. Made with sustainable fabrics that provide UV protection and stretch for comfort.</li>
+                <li><strong>Bikinis:</strong> Mix-and-match tops and bottoms in bold patterns and gradients, catering to diverse body types with adjustable fits.</li>
+                <li><strong>Cover-Ups:</strong> Lightweight, breathable beach cover-ups in flowing designs, perfect for transitioning from beach to casual outings.</li>
+                <li><strong>Men's Swim Trunks:</strong> Durable and quick-drying trunks with modern prints, offering both style and functionality for water sports and leisure.</li>
+                <li><strong>Accessories:</strong> Waterproof beach bags, sun hats, and eco-friendly sandals to complete your summer look.</li>
+            </ul>
+            <p>
+                Our products are designed with sustainability in mind, using recycled materials and ethical production practices. We aim to cater to all customers, offering sizes from XS to 3XL and ensuring our swimwear is both fashionable and functional for all activities.
+            </p>
+        </div>
+    </div>
 
     <div class="container">
         <div class="description glow">
@@ -131,6 +216,25 @@
             const viz = document.getElementById('tableauViz');
             window.addEventListener('resize', () => viz.resize());
         });
+
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modals = ['aboutModal', 'productsModal'];
+            modals.forEach(modalId => {
+                const modal = document.getElementById(modalId);
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        };
     </script>
 </body>
 </html>
