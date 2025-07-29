@@ -7,11 +7,28 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #ff6a00, #ee0979, #4b0082);
+            background: linear-gradient(135deg, #ff6a00, #ffd700, #ee0979, #4b0082);
             min-height: 100vh;
             font-family: 'Arial', sans-serif;
             color: #ffffff;
             overflow-x: hidden;
+            position: relative;
+        }
+        .sun {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, #ffd700 20%, #ff6a00 70%, transparent);
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 0 60px rgba(255, 106, 0, 0.5);
+            animation: pulse 3s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 0 60px rgba(255, 106, 0, 0.5); }
+            50% { transform: scale(1.1); box-shadow: 0 0 50px rgba(255, 215, 0, 1), 0 0 80px rgba(255, 106, 0, 0.7); }
+            100% { transform: scale(1); box-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 0 60px rgba(255, 106, 0, 0.5); }
         }
         .glow {
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 0 40px rgba(255, 106, 0, 0.3);
@@ -22,13 +39,14 @@
             transform: scale(1.02);
         }
         .navbar {
-            background: linear-gradient(90deg, rgba(75, 0, 130, 0.8), rgba(238, 9, 121, 0.8));
+            background: linear-gradient(90deg, rgba(75, 0, 130, 0.8), rgba(255, 215, 0, 0.8), rgba(238, 9, 121, 0.8));
             backdrop-filter: blur(10px);
         }
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            padding-top: 140px; /* Increased to avoid overlap with sun */
         }
         .viz-container {
             background: rgba(255, 255, 255, 0.1);
@@ -64,11 +82,19 @@
             }
             .container {
                 padding: 10px;
+                padding-top: 120px;
+            }
+            .sun {
+                width: 70px;
+                height: 70px;
+                top: 10px;
+                right: 10px;
             }
         }
     </style>
 </head>
 <body>
+    <div class="sun"></div>
     <nav class="navbar p-4">
         <div class="container flex justify-between items-center">
             <h1 class="text-2xl font-bold">Sweamwear Store Analytics</h1>
